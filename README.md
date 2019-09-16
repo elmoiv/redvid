@@ -44,6 +44,27 @@ Here are a few sample tests:
 * [Video only](https://github.com/elmoiv/redvid/tree/master/tests/test1.py)
 * [Video with audio](https://github.com/elmoiv/redvid/tree/master/tests/test2.py)
 
+## Installing FFmpeg
+### Windows: 
+
+https://m.wikihow.com/Install-FFmpeg-on-Windows
+
+(*restart your pc after applying these steps*)
+
+### Linux: 
+
+`sudo apt install ffmpeg`
+
+### Mac OS:
+
+* install [Homebrew](https://brew.sh/):
+
+  `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+  
+* Then:
+
+  `$ brew install ffmpeg`
+
 ## TODO
 * Rename downloaded videos to OP name.
 * Download gifs and pictures.
