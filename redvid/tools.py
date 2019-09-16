@@ -1,6 +1,7 @@
 import re, os
 
 ope = os.path.exists
+sep = os.path.sep
 
 def checkPath(path):
     if not ope(path):
@@ -8,8 +9,8 @@ def checkPath(path):
     else:
         if os.path.isfile(path):
             path = os.path.dirname(path)
-    if path[-1] != '\\':
-        path += '\\'
+    if path[-1] != sep:
+        path += sep
     return path
 
 def isValid(url):
@@ -62,7 +63,7 @@ def UserSelect(lst):
     return lst[int(ql) - 1]
 
 def Clean(path):
-    p = path + 'temp\\'
+    p = path + 'temp' + sep
     if not ope(p):
         return
     os.chdir(path)
