@@ -1,5 +1,5 @@
 # redvid
-[![Build Status](https://api.travis-ci.org/elmoiv/goco.svg?branch=master)](https://travis-ci.org/elmoiv/goco)
+[![Build Status](https://api.travis-ci.org/elmoiv/redvid.svg?branch=master)](https://travis-ci.org/elmoiv/redvid)
 [![Python version](https://img.shields.io/badge/python-3.x-brightgreen.svg)](https://pypi.org/project/goco/)
 
 Smart downloader for Reddit hosted videos
