@@ -1,6 +1,5 @@
 import requests, random, sys
 
-# Inspired from: https://github.com/brianchesley/Lyrics/blob/master/lyrics_data_scrape.py
 userAgents = '''Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36
 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36
 Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36
@@ -846,7 +845,8 @@ Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_6; en-US) AppleWebKit/530.5 (KHTM
 
 class Requester():
     USER_AGENTS = userAgents.split('\n')
-
+    
+    # Inspired from: https://github.com/brianchesley/Lyrics/blob/master/lyrics_data_scrape.py
     def get(self, url, user_agent=True, _proxies={}, _stream=False):
         if user_agent:
             return requests.get(url, headers={'User-Agent': random.choice(self.USER_AGENTS)}, proxies=_proxies, stream=_stream)
