@@ -45,7 +45,7 @@ Here are a few sample tests:
 * [Video with audio](https://github.com/elmoiv/redvid/tree/master/tests/test2.py)
 
 ## TODO
-* Rename download videos to OP name.
+* Rename downloaded videos to OP name.
 * Download gifs and pictures.
 * ...
 
