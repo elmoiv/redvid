@@ -2,7 +2,7 @@
 [![Build Status](https://api.travis-ci.org/elmoiv/redvid.svg?branch=master)](https://travis-ci.org/elmoiv/redvid)
 [![Python version](https://img.shields.io/badge/python-3.x-brightgreen.svg)](https://pypi.org/project/goco/)
 
-#### Smart downloader for Reddit hosted videos
+### Smart downloader for Reddit hosted videos
 
 ## Features
 * #### Download local hosted videos with audio.
