@@ -28,7 +28,7 @@ pip install git+https://github.com/elmoiv/redvid.git
 ## Usage
 Using *redvid* to download a video:
 
-```
+```python
 from redvid import Downloader
 
 reddit = Downloader()
