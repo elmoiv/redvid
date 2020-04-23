@@ -91,7 +91,8 @@ class Downloader(Requester):
         # -loglevel: we set it to `panic` to disable logging but Errors
         print('\n- Merging A/V...')
         os.system('ffmpeg -hide_banner -loglevel panic -y -i video.mp4 -i audio.m4a -vcodec copy -acodec copy av.mp4')
-        video_filename = f'{self.path}{ID}.mp4'
+        
+        video_filename = '{}{}.mp4'.format(self.path, ID)
         if os.path.exists('av.mp4'):
             os.rename('av.mp4', video_filename)
         else:
@@ -148,7 +149,7 @@ class Downloader(Requester):
         '''
         print('\n- Scraping...')
         video, audio, ID = self.setup(url)
-        file_path = f'{self.path}{ID}.mp4'
+        file_path = '{}{}.mp4'.format(self.path, ID)
         if os.path.exists(file_path):
             Clean(self.path)
             raise FileExistsError
