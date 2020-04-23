@@ -5,10 +5,10 @@
 ### Smart downloader for Reddit hosted videos
 
 ## Features
-* #### Download local hosted videos with audio.
-* #### Bypass bot detection.
-* #### Ability to decide quality.
-* #### Requires only `requests` library.
+* Download local hosted videos with audio.
+* Bypass bot detection.
+* Ability to decide quality.
+* Requires only `requests` library.
 
 ## Installation
 `redvid` requires Python 3.
