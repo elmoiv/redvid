@@ -81,23 +81,24 @@ class Downloader(Requester):
             - ex: v.redd.it/`ID`/DASH_720
         '''
         self.get_video(video)
+        video_filename = '{}{}.mp4'.format(self.path, ID)
+
+        # v1.0.5: Converting videos without audio to solve unshareable videos bug
         if not audio:
+            os.system('ffmpeg -hide_banner -loglevel panic -y -i video.mp4 -vcodec copy av.mp4')
             # Moving video file without using shutil
-            os.rename('video.mp4', '{}{}.mp4'.format(self.path, ID))
+            os.rename('video.mp4', video_filename)
             return
+        
         self.get_audio(audio)
+        
         # Using FFmpeg to mux audio and video
         # -hide_banner: hide header text
         # -loglevel: we set it to `panic` to disable logging but Errors
         print('\n- Merging A/V...')
         os.system('ffmpeg -hide_banner -loglevel panic -y -i video.mp4 -i audio.m4a -vcodec copy -acodec copy av.mp4')
         
-        video_filename = '{}{}.mp4'.format(self.path, ID)
-        if os.path.exists('av.mp4'):
-            os.rename('av.mp4', video_filename)
-        else:
-            os.rename('video.mp4', video_filename)
-
+        os.rename('av.mp4', video_filename)
 
     def scrape(self, url):
         '''
