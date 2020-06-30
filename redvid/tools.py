@@ -13,24 +13,11 @@ def checkPath(path):
         path += sep
     return path
 
-def isValid(url):
-    Match = r'(?P<url>https?://(?:[^/]+\.)?reddit\.com/r/[^/]+/comments/(?P<id>[^/?#&]+))'
-    if re.search(Match, url):
-        parts = [i for i in url.split('/') if i]
-        if 6 < len(parts) < 9:
-            return True
-    return False
-    
-'''def toDic(data):
-    return json.loads(data)'''
-
 def toJsonUrl(url):
-    if isValid(url):
-        parts = url.split('/')
-        if len(parts) is 9:
-            url = '/'.join(parts[:-1])
-        return url + '.json'
-    return None
+    parts = url.split('/')
+    if len(parts) is 9:
+        url = '/'.join(parts[:-1])
+    return url + '.json'
 
 def getUNQ(page):
     regex = r'https://v\.redd\.it/[a-zA-Z0-9]+'
