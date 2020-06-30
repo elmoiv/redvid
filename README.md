@@ -6,9 +6,9 @@
 
 ## Features
 * Download local hosted videos with audio.
-* Bypass bot detection.
-* Ability to decide quality.
 * Requires only `requests` library.
+* Ability to decide quality.
+* Bypass bot detection.
 
 ## Installation
 `redvid` requires Python 3.
@@ -31,25 +31,28 @@ Using *redvid* to download a video:
 ```python
 from redvid import Downloader
 
-reddit = Downloader()
-
-video_url = input('Enter video url: ')
-
-reddit.download(video_url)
+reddit = Downloader(max_q=True)
+reddit.overwrite = True
+reddit.url = 'https://v.redd.it/c8oic7ppc2751'
+reddit.download()
 ```
 
 ## Tests
 Here are a few sample tests:
 
-* [Video only](https://github.com/elmoiv/redvid/tree/master/tests/test1.py)
-* [Video with audio](https://github.com/elmoiv/redvid/tree/master/tests/test2.py)
+  * [Video only](https://github.com/elmoiv/redvid/tree/master/tests/test1.py)
+  * [Video with audio](https://github.com/elmoiv/redvid/tree/master/tests/test2.py)
+  * [Choose PATH](https://github.com/elmoiv/redvid/tree/master/tests/test3.py)
+  * [Auto-detect maximum quality](https://github.com/elmoiv/redvid/tree/master/tests/test4.py)
+  * [Auto-detect minimum quality](https://github.com/elmoiv/redvid/tree/master/tests/test5.py)
+  * [Skip file check and overwrite](https://github.com/elmoiv/redvid/tree/master/tests/test6.py)
 
 ## Installing FFmpeg
 ### Windows: 
 
 https://m.wikihow.com/Install-FFmpeg-on-Windows
 
-(*restart your pc after applying these steps*)
+(*You may need to restart your pc after applying these steps*)
 
 ### Linux: 
 
@@ -65,9 +68,16 @@ https://m.wikihow.com/Install-FFmpeg-on-Windows
 
   `$ brew install ffmpeg`
 
+## Changelog
+### v1.0.6:
+  * Can now download urls with **v.reddit.it** fromat.
+  * PATH can be choosed instead of current dir.
+  * Max/Min quality can be automatically set to skip quality query.
+  * Added ffmpeg encoding to videos with no sound to be uploadable on some platforms.
+  * Adjusted printed text and progress bars.
+
 ## TODO
 * Rename downloaded videos to OP name.
-* Download gifs and pictures.
 * ...
 
 ## Contributing
