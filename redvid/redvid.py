@@ -15,11 +15,11 @@ class Downloader(Requester):
         proxies (dict): if you want to use proxy while connecting to Reddit.
     """
     def __init__(self, url='', path='', max_q=False, min_q=False, proxies={}):
-        self.proxies = proxies
+        self.path, self.url, self.proxies = path, url, proxies
         self.max, self.min = max_q, min_q
         self.page = None
         self.overwrite = False
-        self.path, self.url, self.video, self.audio, self.file_name = [''] * 5
+        self.video, self.audio, self.file_name = '', '', ''
         
     def setup(self):
         """
@@ -63,26 +63,28 @@ class Downloader(Requester):
                         UNQ + 'DASHPlaylist.mpd',
                         _proxies=self.proxies
                         )
-        VQS = mpdParse(mpd.text)
+        # v1.0.8: Fix new Reddit mechanism
+        VQS, AQS = mpdParse(mpd.text)
 
         # Check for Audio
-        if hasAudio(VQS):
-            self.audio = UNQ + VQS.pop(-1)
+        if AQS:
+            self.audio = UNQ + j(AQS[0])
 
         # Select Quality
         if self.max:
-            quality = VQS[0]
+            quality = j(VQS[0])
         elif self.min:
-            quality = VQS[-1]
+            quality = j(VQS[-1])
         else:
-            quality = UserSelect(VQS)
+            quality = j(UserSelect(VQS))
         
         self.video = UNQ + quality
         self.file_name = '{}{}-{}.mp4'.format(
-                                        self.path,
-                                        UNQ.split('/')[-2],
-                                        quality
-                                        )
+                                    self.path,
+                                    UNQ.split('/')[-2],
+                                    quality
+                                    # v1.0.8: fix file name dups
+                                    ).replace('.mp4' * 2, '.mp4')
         
     def get_video(self):
         """

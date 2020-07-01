@@ -2,6 +2,7 @@ import re, os
 
 ope = os.path.exists
 sep = os.path.sep
+j = ''.join
 
 def checkPath(path):
     if not ope(path):
@@ -29,18 +30,17 @@ def getUNQ(page):
     return UNQ
     
 def mpdParse(mpd):
-    tag = r'<BaseURL>(.*?)</BaseURL>'
-    extracted = re.findall(tag, mpd)
-    return extracted
-
-def hasAudio(lst):
-    return any(i == 'audio' for i in lst)
+    # v1.0.8: Fix for new reddit mechanism
+    tag_vid = r'<BaseURL>(DASH_)?(\d+)(\.mp4)?</BaseURL>'
+    tag_aud = r'<BaseURL>(DASH_)?(audio)(\.mp4)?</BaseURL>'
+    lst_vid = re.findall(tag_vid, mpd)
+    yield sorted(lst_vid, key=lambda a: int(a[1]))[::-1]
+    yield re.findall(tag_aud, mpd)
 
 def UserSelect(lst):
     print('\nQualities available:')
     for n, i in enumerate(lst):
-        i = i.split('_')[1]
-        print('  [{}] {}p'.format(n + 1, i))
+        print('  [{}] {}p'.format(n + 1, i[1]))
     ql = input('\nChoose Quality: ')
     # If a dumbass chose nothing
     try:
@@ -55,10 +55,5 @@ def Clean(path):
         return
     os.chdir(path)
     for i in os.listdir(p):
-        os.remove(p+i)
+        os.remove(p + i)
     os.rmdir(p)
-
-def Clear(text, elements=[], tgt=''):
-    for element in elements:
-        text = text.replace(element, tgt)
-    return text
