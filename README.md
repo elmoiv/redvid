@@ -69,6 +69,8 @@ https://m.wikihow.com/Install-FFmpeg-on-Windows
   `$ brew install ffmpeg`
 
 ## Changelog
+### v1.0.7:
+  * `download()` will return file path again.
 ### v1.0.6:
   * Can now download urls with **v.reddit.it** fromat.
   * PATH can be choosed instead of current dir.
