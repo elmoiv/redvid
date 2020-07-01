@@ -69,6 +69,8 @@ https://m.wikihow.com/Install-FFmpeg-on-Windows
   `$ brew install ffmpeg`
 
 ## Changelog
+### v1.0.8:
+  * Fixed a bug with quality fetching.
 ### v1.0.7:
   * `download()` will return file path again.
 ### v1.0.6:
