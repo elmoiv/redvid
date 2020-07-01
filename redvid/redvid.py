@@ -121,6 +121,9 @@ class Downloader(Requester):
     def download(self):
         """
         Automatic usage of the class
+
+        Returns:
+            self.file_name (str): PATH of the downloaded video
         """
         print('>> Connecting...')
         self.setup()
@@ -142,3 +145,4 @@ class Downloader(Requester):
         
         Clean(self.path)
         print('>> Done')
+        return self.file_name
