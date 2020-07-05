@@ -33,9 +33,13 @@ Using *redvid* to download a video:
 from redvid import Downloader
 
 reddit = Downloader(max_q=True)
-reddit.overwrite = True
 reddit.url = 'https://v.redd.it/c8oic7ppc2751'
 reddit.download()
+```
+or
+```python
+from redvid import Downloader
+Downloader(url='https://v.redd.it/c8oic7ppc2751', max_q=True).download()
 ```
 
 ## Tests
