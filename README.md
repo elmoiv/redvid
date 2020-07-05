@@ -39,6 +39,7 @@ reddit.download()
 or
 ```python
 from redvid import Downloader
+
 Downloader(url='https://v.redd.it/c8oic7ppc2751', max_q=True).download()
 ```
 
