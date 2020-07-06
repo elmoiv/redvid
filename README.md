@@ -86,9 +86,5 @@ https://m.wikihow.com/Install-FFmpeg-on-Windows
   * Added ffmpeg encoding to videos with no sound to be uploadable on some platforms.
   * Adjusted printed text and progress bars.
 
-## TODO
-* Rename downloaded videos to OP name.
-* ...
-
 ## Contributing
 Please contribute! If you want to fix a bug, suggest improvements, or add new features to the project, just [open an issue](https://github.com/elmoiv/redvid/issues) or send me a pull request.
