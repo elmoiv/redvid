@@ -9,7 +9,7 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name="redvid",
-    version="1.0.8",
+    version="1.0.9",
     author="elmoiv",
     author_email="elmoiv@yahoo.com",
     description="Smart downloader for Reddit hosted videos",

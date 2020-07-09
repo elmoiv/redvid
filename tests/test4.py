@@ -2,5 +2,5 @@ from redvid import Downloader
 
 reddit = Downloader()
 reddit.max = True
-reddit.url = 'https://www.reddit.com/r/HeavyFuckingWind/comments/hiuauw/its_been_blowing_like_this_all_day_without_stop/'
+reddit.url = 'https://www.reddit.com/r/N_N_N/comments/hj4qxb/explosion_at_sina_athar_hospital_17_reported_dead/'
 reddit.download()

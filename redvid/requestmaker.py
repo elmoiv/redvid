@@ -1,4 +1,5 @@
 import requests, random, sys, urllib.request
+from .tools import lprint
 
 userAgents = '''Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36
 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36
@@ -185,6 +186,8 @@ Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/534.13 (KHTML, like Gecko) U
 Mozilla/5.0 (X11; U; Windows NT 6; en-US) AppleWebKit/534.12 (KHTML, like Gecko) Chrome/9.0.587.0 Safari/534.12
 Mozilla/5.0 (Windows  U  Windows NT 5.1  en-US) AppleWebKit/534.12 (KHTML, like Gecko) Chrome/9.0.583.0 Safari/534.12'''
 
+logg = 1
+
 def reporthook(blocknum, blocksize, totalsize):
     readsofar = blocknum * blocksize
     # Fix for progressbar with random length
@@ -194,22 +197,29 @@ def reporthook(blocknum, blocksize, totalsize):
     r_size = totalsize / 1024**2
     d_size = readsofar / 1024**2
     pgbar = '[{}{}] '.format('█' * percent, ' ' * (50 - percent)) + '[{0:.2f}/{1:.2f} MB]'.format(d_size, r_size)
-    print('\r>>>>', pgbar, end='\r')
+    lprint(logg, '\r>>>>', pgbar, end='\r')
 
 class Requester():
     USER_AGENTS = userAgents.split('\n')
     
     # Inspired from: https://github.com/brianchesley/Lyrics/blob/master/lyrics_data_scrape.py
-    def get(self, url, user_agent=True, _proxies={}, _stream=False):
+    def get(self, url, user_agent=True, _proxies={}):
         if user_agent:
-            return requests.get(url, headers={'User-Agent': random.choice(self.USER_AGENTS)}, proxies=_proxies, stream=_stream)
+            return requests.get(url, headers={'User-Agent': random.choice(self.USER_AGENTS)}, proxies=_proxies)
         return requests.get(url)
+    
+    def head(self, url, user_agent=True, _proxies={}):
+        if user_agent:
+            return requests.head(url, headers={'User-Agent': random.choice(self.USER_AGENTS)}, proxies=_proxies)
+        return requests.head(url)
 
-    def pgbar(self, url, output_path, hint=''):
+    def pgbar(self, log, url, output_path, hint=''):
+        global logg
+        logg = log
         # Avoid urllib.error.HTTPError: HTTP Error 403: Forbidden
         # https://stackoverflow.com/a/34957875/5305953
-        print(hint)
+        lprint(log, hint)
         opener = urllib.request.URLopener()
         opener.addheader('User-Agent', 'Mozilla/5.0')
         opener.retrieve(url, filename=output_path, reporthook=reporthook)
-        print()
+        lprint(log)

@@ -2,6 +2,7 @@
 [![HitCount](http://hits.dwyl.io/elmoiv/redvid.svg)](http://hits.dwyl.io/elmoiv/redvid)
 [![Build Status](https://api.travis-ci.org/elmoiv/redvid.svg?branch=master)](https://travis-ci.org/elmoiv/redvid)
 [![Python version](https://img.shields.io/badge/python-3.x-brightgreen.svg)](https://pypi.org/project/redvid/)
+[![Current Release](https://img.shields.io/github/v/release/elmoiv/redvid.svg)](https://github.com/elmoiv/redvid/releases)
 
 ### Smart downloader for Reddit hosted videos
 
@@ -52,6 +53,11 @@ Here are a few sample tests:
   * [Auto-detect maximum quality](https://github.com/elmoiv/redvid/tree/master/tests/test4.py)
   * [Auto-detect minimum quality](https://github.com/elmoiv/redvid/tree/master/tests/test5.py)
   * [Skip file check and overwrite](https://github.com/elmoiv/redvid/tree/master/tests/test6.py)
+  * [Silent download (No logging)](https://github.com/elmoiv/redvid/tree/master/tests/test7.py)
+  * [Set maximum video size](https://github.com/elmoiv/redvid/tree/master/tests/test8.py)
+  * [Set maximum video size (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test9.py)
+  * [Set maximum video duration](https://github.com/elmoiv/redvid/tree/master/tests/test10.py)
+  * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
 
 ## Installing FFmpeg
 ### Windows: 
@@ -75,6 +81,10 @@ https://m.wikihow.com/Install-FFmpeg-on-Windows
   `$ brew install ffmpeg`
 
 ## Changelog
+### v1.0.9:
+  * Added the ability to disable logging.
+  * Maximum video size can be set.
+  * Maximum video duration can be set.
 ### v1.0.8:
   * Fixed a bug with quality fetching.
 ### v1.0.7:

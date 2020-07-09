@@ -4,6 +4,10 @@ ope = os.path.exists
 sep = os.path.sep
 j = ''.join
 
+def lprint(switch=0, *args, **kwargs):
+    if switch:
+        print(*args, **kwargs)
+
 def checkPath(path):
     if not ope(path):
         path = os.getcwd()
@@ -28,7 +32,12 @@ def getUNQ(page):
         UNQ = Match[0]
         UNQ += '/' if UNQ[-1] != '/' else UNQ
     return UNQ
-    
+
+# v1.0.9: getting duration
+def getDuration(page):
+    dur = re.findall(r'"duration": (\d+)', page.text)
+    return int(dur[0]) if dur else None
+
 def mpdParse(mpd):
     # v1.0.8: Fix for new reddit mechanism
     tag_vid = r'<BaseURL>(DASH_)?(\d+)(\.mp4)?</BaseURL>'

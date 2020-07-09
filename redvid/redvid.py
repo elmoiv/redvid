@@ -11,20 +11,40 @@ class Downloader(Requester):
         path (str): Location where videos will be saved.
         max_q (bool): Get video with maximum quality.
         min_q (bool): Get video with minimum quality.
+        max_d (int): Allow only when duration is <= max_d.
+        max_s (int): Allow only when size is <= max_s.
         overwrite (bool): To skip file checking and download.
-        proxies (dict): if you want to use proxy while connecting to Reddit.
+        log (bool): Turn logging on or off.
+        proxies (dict): Use proxy while connecting to Reddit.
     """
-    def __init__(self, url='', path='', max_q=False, min_q=False, proxies={}):
+    def __init__(
+                self,
+                url='',
+                path='',
+                max_q=False,
+                min_q=False,
+                max_d=1e1000,
+                max_s=1e1000,
+                log=True,
+                proxies={}
+                ):
         self.path, self.url, self.proxies = path, url, proxies
-        self.max, self.min = max_q, min_q
+        self.max, self.min, self.log = max_q, min_q, log
+        self.max_d, self.max_s = max_d, max_s
         self.page = None
         self.overwrite = False
+        self.ischeck = False
         self.video, self.audio, self.file_name = '', '', ''
+        self.duration, self.size = 0, 0
         
     def setup(self):
         """
         Checks PATH and URL for any errors
         """
+        if not self.log:
+            if not self.max and not self.min:
+                self.max = True
+
         self.path = checkPath(self.path)
         Clean(self.path)
         os.chdir(self.path)
@@ -85,18 +105,18 @@ class Downloader(Requester):
                                     quality
                                     # v1.0.8: fix file name dups
                                     ).replace('.mp4' * 2, '.mp4')
-        
+
     def get_video(self):
         """
         Downloads video to the current working directory
         """
-        self.pgbar(self.video, 'video.mp4', '>> Video:')
+        self.pgbar(self.log, self.video, 'video.mp4', '>> Video:')
 
     def get_audio(self):
         """
         Downloads audio to the current working directory
         """
-        self.pgbar(self.audio, 'audio.m4a', '>> Audio:')
+        self.pgbar(self.log, self.audio, 'audio.m4a', '>> Audio:')
 
     def get_and_mux(self):
         """
@@ -119,32 +139,65 @@ class Downloader(Requester):
 
         # Moving video file without using shutil
         os.rename('av.mp4', self.file_name)
+    
+    # v1.0.9: get size and duration
+    def check(self):
+        """
+        Scrapes video and metadata (Duration and size)
+        """
+        self.ischeck = True
         
+        lprint(self.log, '>> Connecting...')
+        self.setup()
+        
+        lprint(self.log, '>> Scraping...')
+        self.scrape()
+        
+        self.duration = getDuration(self.page)
+        self.size = int(
+                    self.head(
+                                self.video,
+                                _proxies=self.proxies
+                            ).headers['Content-Length']
+                        )
+    
     def download(self):
         """
         Automatic usage of the class
 
         Returns:
             self.file_name (str): PATH of the downloaded video
+            0: Size exceeds maximum
+            1: Duration exceeds maximum
+            2: File exists
         """
-        print('>> Connecting...')
-        self.setup()
+        if not self.ischeck:
+            self.check()
         
-        print('>> Scraping...')
-        self.scrape()
+        if self.size > self.max_s:
+            lprint(self.log, '>> Size > {} bytes'.format(self.max_s))
+            return 0
+        
+        if self.duration > self.max_d:
+            lprint(self.log, '>> Duration > {}s'.format(self.max_d))
+            return 1
         
         if self.overwrite and ope(self.file_name):
             os.remove(self.file_name)
+        
         elif not self.overwrite and ope(self.file_name):
             Clean(self.path)
-            raise FileExistsError('{} exists!'.format(
+            lprint(self.log, '{} exists!'.format(
                                     os.path.basename(self.file_name)
                                     )
                                 )
+            return 2
         
-        print('>> Downloading and Re-encoding...')
+        lprint(self.log, '>> Downloading and Re-encoding...')
         self.get_and_mux()
         
         Clean(self.path)
-        print('>> Done')
+        lprint(self.log, '>> Done')
+
+        self.ischeck = False
         return self.file_name
