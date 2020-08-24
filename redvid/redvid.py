@@ -89,6 +89,11 @@ class Downloader(Requester):
         # Check for Audio
         if AQS:
             self.audio = UNQ + j(AQS[0])
+        
+        # Fix - It was creating recursive directories like temp/temp/temp/temp when VQS was equals to [].
+        if VQS == []:
+            Clean(self.path)
+            raise BaseException('Malformed quality.')
 
         # Select Quality
         if self.max:
