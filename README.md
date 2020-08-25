@@ -84,6 +84,8 @@ Here are a few sample tests:
   * redvid can now decide best quality according to given size.
   * Added support for old reddit videos.
   * Fixed bug where video qualities list can't be parsed.
+  * Throw error if video has no quality [Reddit updates].
+
 ### v1.0.9:
   * Added the ability to disable logging.
   * Maximum video size can be set.
