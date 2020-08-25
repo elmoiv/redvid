@@ -25,15 +25,22 @@ class Downloader(Requester):
                 min_q=False,
                 max_d=1e1000,
                 max_s=1e1000,
+                auto_max=False,
                 log=True,
                 proxies={}
                 ):
         self.path, self.url, self.proxies = path, url, proxies
         self.max, self.min, self.log = max_q, min_q, log
         self.max_d, self.max_s = max_d, max_s
+        self.auto_max = auto_max
+        
+        self.sizes_error = False
         self.page = None
         self.overwrite = False
         self.ischeck = False
+        self.UNQ = None
+        self.r_url = None
+        self.videos = []
         self.video, self.audio, self.file_name = '', '', ''
         self.duration, self.size = 0, 0
         
@@ -41,6 +48,9 @@ class Downloader(Requester):
         """
         Checks PATH and URL for any errors
         """
+        self.ischeck = False
+        self.is_catch_errors = False
+        
         if not self.log:
             if not self.max and not self.min:
                 self.max = True
@@ -73,43 +83,31 @@ class Downloader(Requester):
         """
         Gets direct video and audio (if exists) urls
         """
-        UNQ = getUNQ(self.page)
-        if not UNQ:
+        self.UNQ = getUNQ(self.page)
+
+        if not self.UNQ:
             Clean(self.path)
             raise BaseException('No video in this post')
+        
+        self.r_url = 'https://v.redd.it/' + self.UNQ + '/'
 
         # Getting Qualities and audio (if exists) from mpd file
         mpd = self.get(
-                        UNQ + 'DASHPlaylist.mpd',
+                        self.r_url + 'DASHPlaylist.mpd',
                         _proxies=self.proxies
                         )
         # v1.0.8: Fix new Reddit mechanism
         VQS, AQS = mpdParse(mpd.text)
 
+        if [VQS, AQS] == [0, 0]:
+            raise BaseException('Qualities not found!')
+
+        self.videos = VQS
+
         # Check for Audio
         if AQS:
-            self.audio = UNQ + j(AQS[0])
-        
-        # Fix - It was creating recursive directories like temp/temp/temp/temp when VQS was equals to [].
-        if VQS == []:
-            Clean(self.path)
-            raise BaseException('Malformed quality.')
+            self.audio = self.r_url + j(AQS)
 
-        # Select Quality
-        if self.max:
-            quality = j(VQS[0])
-        elif self.min:
-            quality = j(VQS[-1])
-        else:
-            quality = j(UserSelect(VQS))
-        
-        self.video = UNQ + quality
-        self.file_name = '{}{}-{}.mp4'.format(
-                                    self.path,
-                                    UNQ.split('/')[-2],
-                                    quality
-                                    # v1.0.8: fix file name dups
-                                    ).replace('.mp4' * 2, '.mp4')
 
     def get_video(self):
         """
@@ -144,32 +142,79 @@ class Downloader(Requester):
 
         # Moving video file without using shutil
         os.rename('av.mp4', self.file_name)
+
+        # Clean Temp folder
+        Clean(self.path)
     
     # v1.0.9: get size and duration
     def check(self):
         """
         Scrapes video and metadata (Duration and size)
         """
-        self.ischeck = True
-        
         lprint(self.log, '>> Connecting...')
         self.setup()
         
         lprint(self.log, '>> Scraping...')
         self.scrape()
         
+        quality = None
+
+        # Select Quality
+        self.sizes_error = False
+
+        # v1.1.0: Get quality according to max size
+        if self.auto_max:
+            lprint(self.log, '>> Getting quality according to max size.')
+            sizes = getSizes(
+                            self.r_url,
+                            self.head,
+                            self.proxies,
+                            self.videos
+                            )
+            
+            # Loop through qualities and compare each size to max_s
+            for v, s in sorted(sizes, key=lambda i: i[1])[::-1]:
+                if s <= self.max_s:
+                    quality = j(v)
+                    break
+            
+            # Store error if no quality is <= max_s
+            if not quality:
+                lprint(self.log, '>>>> All qualities are > {} bytes' \
+                                 .format(self.max_s))
+                self.sizes_error = True
+                return
+        else:
+            if self.max:
+                quality = j(self.videos[0])
+            elif self.min:
+                quality = j(self.videos[-1])
+            else:
+                quality = j(UserSelect(self.videos))
+        
+        self.video = self.r_url + quality
+
+        self.file_name = '{}{}-{}.mp4'.format(
+                                    self.path,
+                                    self.UNQ,
+                                    quality
+                                    # v1.0.8: fix file name dups
+                                    ).replace('.mp4' * 2, '.mp4')
+        
         self.duration = getDuration(self.page)
-        self.size = int(
-                    self.head(
+        if not self.auto_max:
+            self.size = int(
+                        self.head(
                                 self.video,
                                 _proxies=self.proxies
                             ).headers['Content-Length']
                         )
-    
+        
+        self.ischeck = True
+
     def download(self):
         """
         Automatic usage of the class
-
         Returns:
             self.file_name (str): PATH of the downloaded video
             0: Size exceeds maximum
@@ -178,14 +223,16 @@ class Downloader(Requester):
         """
         if not self.ischeck:
             self.check()
+        self.ischeck = False
         
-        if self.size > self.max_s:
+        if self.size > self.max_s or self.sizes_error:
             lprint(self.log, '>> Size > {} bytes'.format(self.max_s))
             return 0
         
-        if self.duration > self.max_d:
-            lprint(self.log, '>> Duration > {}s'.format(self.max_d))
-            return 1
+        if self.duration:
+            if self.duration > self.max_d:
+                lprint(self.log, '>> Duration > {}s'.format(self.max_d))
+                return 1
         
         if self.overwrite and ope(self.file_name):
             os.remove(self.file_name)
@@ -204,5 +251,4 @@ class Downloader(Requester):
         Clean(self.path)
         lprint(self.log, '>> Done')
 
-        self.ischeck = False
         return self.file_name

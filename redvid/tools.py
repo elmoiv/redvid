@@ -25,12 +25,11 @@ def toJsonUrl(url):
     return url + '.json'
 
 def getUNQ(page):
-    regex = r'https://v\.redd\.it/[a-zA-Z0-9]+'
+    regex = r'/([a-zA-Z0-9]+)/DASHPlaylist.mpd'
     Match = re.findall(regex, page.text)
     UNQ = None
     if Match:
         UNQ = Match[0]
-        UNQ += '/' if UNQ[-1] != '/' else UNQ
     return UNQ
 
 # v1.0.9: getting duration
@@ -38,13 +37,40 @@ def getDuration(page):
     dur = re.findall(r'"duration": (\d+)', page.text)
     return int(dur[0]) if dur else None
 
+# v1.1.0: looping through qualities to get all sizes
+def getSizes(u, h, p, vs):
+    sizes = []
+    for v in vs:
+        sizes.append(
+            (v, int(h(
+                u + j(v),
+                _proxies=p
+            ).headers['Content-Length']))
+        )
+    return sizes
+
 def mpdParse(mpd):
     # v1.0.8: Fix for new reddit mechanism
-    tag_vid = r'<BaseURL>(DASH_)?(\d+)(\.mp4)?</BaseURL>'
-    tag_aud = r'<BaseURL>(DASH_)?(audio)(\.mp4)?</BaseURL>'
-    lst_vid = re.findall(tag_vid, mpd)
-    yield sorted(lst_vid, key=lambda a: int(a[1]))[::-1]
-    yield re.findall(tag_aud, mpd)
+    tags = r'<BaseURL>(DASH_)?(.*?)(\.mp4)?</BaseURL>'
+    re_tags = re.findall(tags, mpd)
+
+    # Filter audio tag
+    tag_aud = None
+    for n, tag in enumerate(re_tags):
+        if 'audio' in tag:
+            tag_aud = re_tags.pop(n)
+            break
+    
+    if not re_tags:
+        return 0, 0
+
+    # Allow getting qualities with old reddit method
+    try:
+        yield sorted(re_tags, key=lambda a: int(a[1]))[::-1]
+    except:
+        yield sorted(re_tags, key=lambda a: a[1])[::-1]
+
+    yield tag_aud
 
 def UserSelect(lst):
     print('\nQualities available:')

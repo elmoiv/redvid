@@ -4,7 +4,7 @@
 [![Python version](https://img.shields.io/badge/python-3.x-brightgreen.svg)](https://pypi.org/project/redvid/)
 [![Current Release](https://img.shields.io/github/v/release/elmoiv/redvid.svg)](https://github.com/elmoiv/redvid/releases)
 
-### Smart downloader for Reddit hosted videos
+### Smart downloader for Reddit *hosted* videos
 
 ## Features
 * Download local hosted videos with audio.
@@ -68,17 +68,22 @@ Here are a few sample tests:
 
   * [Video only](https://github.com/elmoiv/redvid/tree/master/tests/test1.py)
   * [Video with audio](https://github.com/elmoiv/redvid/tree/master/tests/test2.py)
+  * [**[NEW]** Get best quality according to given size (Automated)](https://github.com/elmoiv/redvid/tree/master/tests/test12.py)
   * [Choose PATH](https://github.com/elmoiv/redvid/tree/master/tests/test3.py)
   * [Auto-detect maximum quality](https://github.com/elmoiv/redvid/tree/master/tests/test4.py)
   * [Auto-detect minimum quality](https://github.com/elmoiv/redvid/tree/master/tests/test5.py)
   * [Skip file check and overwrite](https://github.com/elmoiv/redvid/tree/master/tests/test6.py)
   * [Silent download (No logging)](https://github.com/elmoiv/redvid/tree/master/tests/test7.py)
   * [Set maximum video size](https://github.com/elmoiv/redvid/tree/master/tests/test8.py)
-  * [Set maximum video size (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test9.py)
+    * [Set maximum video size (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test9.py)
   * [Set maximum video duration](https://github.com/elmoiv/redvid/tree/master/tests/test10.py)
-  * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
+    * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
  
 ## Changelog
+### v1.1.0
+  * redvid can now decide best quality according to given size.
+  * Added support for old reddit videos.
+  * Fixed bug where video qualities list can't be parsed.
 ### v1.0.9:
   * Added the ability to disable logging.
   * Maximum video size can be set.
