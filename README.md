@@ -8,7 +8,7 @@
 
 ## Features
 * Download local hosted videos with audio.
-* Requires only `requests` library.
+* Requires only `requests` and `FFmpeg`.
 * Ability to decide quality.
 * Bypass bot detection.
 
@@ -42,21 +42,6 @@ or
 __import__('redvid').Downloader(url='https://v.redd.it/c8oic7ppc2751', max_q=True).download()
 ```
 
-## Tests
-Here are a few sample tests:
-
-  * [Video only](https://github.com/elmoiv/redvid/tree/master/tests/test1.py)
-  * [Video with audio](https://github.com/elmoiv/redvid/tree/master/tests/test2.py)
-  * [Choose PATH](https://github.com/elmoiv/redvid/tree/master/tests/test3.py)
-  * [Auto-detect maximum quality](https://github.com/elmoiv/redvid/tree/master/tests/test4.py)
-  * [Auto-detect minimum quality](https://github.com/elmoiv/redvid/tree/master/tests/test5.py)
-  * [Skip file check and overwrite](https://github.com/elmoiv/redvid/tree/master/tests/test6.py)
-  * [Silent download (No logging)](https://github.com/elmoiv/redvid/tree/master/tests/test7.py)
-  * [Set maximum video size](https://github.com/elmoiv/redvid/tree/master/tests/test8.py)
-  * [Set maximum video size (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test9.py)
-  * [Set maximum video duration](https://github.com/elmoiv/redvid/tree/master/tests/test10.py)
-  * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
-
 ## Installing FFmpeg
 ### Windows: 
 
@@ -78,6 +63,21 @@ https://m.wikihow.com/Install-FFmpeg-on-Windows
 
   `$ brew install ffmpeg`
 
+## Tests
+Here are a few sample tests:
+
+  * [Video only](https://github.com/elmoiv/redvid/tree/master/tests/test1.py)
+  * [Video with audio](https://github.com/elmoiv/redvid/tree/master/tests/test2.py)
+  * [Choose PATH](https://github.com/elmoiv/redvid/tree/master/tests/test3.py)
+  * [Auto-detect maximum quality](https://github.com/elmoiv/redvid/tree/master/tests/test4.py)
+  * [Auto-detect minimum quality](https://github.com/elmoiv/redvid/tree/master/tests/test5.py)
+  * [Skip file check and overwrite](https://github.com/elmoiv/redvid/tree/master/tests/test6.py)
+  * [Silent download (No logging)](https://github.com/elmoiv/redvid/tree/master/tests/test7.py)
+  * [Set maximum video size](https://github.com/elmoiv/redvid/tree/master/tests/test8.py)
+  * [Set maximum video size (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test9.py)
+  * [Set maximum video duration](https://github.com/elmoiv/redvid/tree/master/tests/test10.py)
+  * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
+ 
 ## Changelog
 ### v1.0.9:
   * Added the ability to disable logging.
