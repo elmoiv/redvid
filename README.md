@@ -80,7 +80,7 @@ Here are a few sample tests:
     * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
  
 ## Changelog
-### v1.1.0
+### v1.1.0:
   * redvid can now decide best quality according to given size.
   * Added support for old reddit videos.
   * Fixed bug where video qualities list can't be parsed.
