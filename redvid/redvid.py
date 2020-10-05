@@ -108,7 +108,6 @@ class Downloader(Requester):
         if AQS:
             self.audio = self.r_url + j(AQS)
 
-
     def get_video(self):
         """
         Downloads video to the current working directory

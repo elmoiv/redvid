@@ -80,24 +80,24 @@ Here are a few sample tests:
     * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
  
 ## Changelog
+### v1.1.1:
+  * [#15](https://github.com/elmoiv/redvid/issues/15) Fixed bug when fetching reddit videos with expiry date
 ### v1.1.0:
-  * redvid can now decide best quality according to given size.
+  * [#11](https://github.com/elmoiv/redvid/issues/11) redvid can now decide best quality according to given size.
   * Added support for old reddit videos.
   * Fixed bug where video qualities list can't be parsed.
-  * Throw error if video has no quality [Reddit updates].
-
 ### v1.0.9:
-  * Added the ability to disable logging.
+  * [#8](https://github.com/elmoiv/redvid/issues/8) Added the ability to disable logging.
   * Maximum video size can be set.
-  * Maximum video duration can be set.
+  * [#9](https://github.com/elmoiv/redvid/issues/9) Maximum video duration can be set.
 ### v1.0.8:
-  * Fixed a bug with quality fetching.
+  * [#7](https://github.com/elmoiv/redvid/issues/7) Fixed a bug with quality fetching.
 ### v1.0.7:
   * `download()` will return file path again.
 ### v1.0.6:
-  * Can now download urls with **v.reddit.it** fromat.
-  * PATH can be choosed instead of current dir.
-  * Max/Min quality can be automatically set to skip quality query.
+  * [#5](https://github.com/elmoiv/redvid/issues/5) Can now download urls with **v.reddit.it** fromat.
+  * [#4](https://github.com/elmoiv/redvid/issues/4) PATH can be choosed instead of current dir.
+  * [#3](https://github.com/elmoiv/redvid/issues/3) Max/Min quality can be automatically set to skip quality query.
   * Added ffmpeg encoding to videos with no sound to be uploadable on some platforms.
   * Adjusted printed text and progress bars.
 

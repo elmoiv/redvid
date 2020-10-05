@@ -49,17 +49,35 @@ def getSizes(u, h, p, vs):
         )
     return sizes
 
+# v1.1.1: if 'vcf.redd.it' in <BASEURL>
+# we extract DASH quality names and store them in
+# the same form of original re.findall result
+def vcfRemover(BaseUrls, rgx):
+    vcfRemovedUrls = map(
+        lambda i: j(i).split('?')[0].split('/')[-1],
+        BaseUrls
+    )
+    convertToReTags = map(
+        lambda i: re.findall(rgx, f'<BaseURL>{i}</BaseURL>')[0],
+        vcfRemovedUrls
+    )
+    return list(convertToReTags)
+
 def mpdParse(mpd):
     # v1.0.8: Fix for new reddit mechanism
     tags = r'<BaseURL>(DASH_)?(.*?)(\.mp4)?</BaseURL>'
     re_tags = re.findall(tags, mpd)
 
+    # v1.1.1: Fix Base Urls from vcf.redd.it
+    if any('vcf.redd.it' in j(i) for i in re_tags):
+        re_tags = vcfRemover(re_tags, tags)
+
     # Filter audio tag
     tag_aud = None
-    for n, tag in enumerate(re_tags):
+    for tag in re_tags:
         if 'audio' in tag:
-            tag_aud = re_tags.pop(n)
-            break
+            tag_aud = tag
+            re_tags.remove(tag)
     
     if not re_tags:
         return 0, 0
