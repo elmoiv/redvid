@@ -58,7 +58,7 @@ def vcfRemover(BaseUrls, rgx):
         BaseUrls
     )
     convertToReTags = map(
-        lambda i: re.findall(rgx, f'<BaseURL>{i}</BaseURL>')[0],
+        lambda i: re.findall(rgx, '<BaseURL>{}</BaseURL>'.format(i))[0],
         vcfRemovedUrls
     )
     return list(convertToReTags)
