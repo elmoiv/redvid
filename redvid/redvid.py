@@ -131,15 +131,15 @@ class Downloader(Requester):
         if self.audio:
             self.get_audio()
             os.system(
-                    'ffmpeg -hide_banner -loglevel panic -y -i {0}video.mp4'
-                    ' -i {0}audio.m4a -vcodec copy -acodec copy {0}av.mp4'.format(
+                    'ffmpeg -hide_banner -loglevel panic -y -i "{0}video.mp4"'
+                    ' -i "{0}audio.m4a" -vcodec copy -acodec copy "{0}av.mp4"'.format(
                         self.temp
                     )
                 )
         else:
             os.system(
-                    'ffmpeg -hide_banner -loglevel panic -y -i {0}video.mp4'
-                    ' -vcodec copy {0}av.mp4'.format(
+                    'ffmpeg -hide_banner -loglevel panic -y -i "{0}video.mp4"'
+                    ' -vcodec copy "{0}av.mp4"'.format(
                         self.temp
                     )
                 )
