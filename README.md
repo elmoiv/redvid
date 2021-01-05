@@ -80,8 +80,10 @@ Here are a few sample tests:
     * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
  
 ## Changelog
+### v1.1.2:
+  * [#18](https://github.com/elmoiv/redvid/issues/18) Fixed bug when handling path that caused recursive directories.
 ### v1.1.1:
-  * [#15](https://github.com/elmoiv/redvid/issues/15) Fixed bug when fetching reddit videos with expiry date
+  * [#15](https://github.com/elmoiv/redvid/issues/15) Fixed bug when fetching reddit videos with expiry date.
 ### v1.1.0:
   * [#11](https://github.com/elmoiv/redvid/issues/11) redvid can now decide best quality according to given size.
   * Added support for old reddit videos.
