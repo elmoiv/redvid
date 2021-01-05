@@ -57,10 +57,11 @@ class Downloader(Requester):
 
         self.path = checkPath(self.path)
         Clean(self.path)
-        os.chdir(self.path)
         
-        os.makedirs('temp', exist_ok=True)
-        os.chdir('temp')
+        # v1.1.2: Fix recursive path by providing static
+        # temp path
+        self.temp = opj(self.path, 'temp') + sep
+        os.makedirs(self.temp, exist_ok=True)
         
         # Allow v.redd.it url formats
         if 'v.redd.it' in self.url:
@@ -112,13 +113,13 @@ class Downloader(Requester):
         """
         Downloads video to the current working directory
         """
-        self.pgbar(self.log, self.video, 'video.mp4', '>> Video:')
+        self.pgbar(self.log, self.video, self.temp + 'video.mp4', '>> Video:')
 
     def get_audio(self):
         """
         Downloads audio to the current working directory
         """
-        self.pgbar(self.log, self.audio, 'audio.m4a', '>> Audio:')
+        self.pgbar(self.log, self.audio, self.temp + 'audio.m4a', '>> Audio:')
 
     def get_and_mux(self):
         """
@@ -130,17 +131,21 @@ class Downloader(Requester):
         if self.audio:
             self.get_audio()
             os.system(
-                    'ffmpeg -hide_banner -loglevel panic -y -i video.mp4'
-                    ' -i audio.m4a -vcodec copy -acodec copy av.mp4'
+                    'ffmpeg -hide_banner -loglevel panic -y -i {0}video.mp4'
+                    ' -i {0}audio.m4a -vcodec copy -acodec copy {0}av.mp4'.format(
+                        self.temp
                     )
+                )
         else:
             os.system(
-                    'ffmpeg -hide_banner -loglevel panic -y -i video.mp4'
-                    ' -vcodec copy av.mp4'
+                    'ffmpeg -hide_banner -loglevel panic -y -i {0}video.mp4'
+                    ' -vcodec copy {0}av.mp4'.format(
+                        self.temp
                     )
+                )
 
         # Moving video file without using shutil
-        os.rename('av.mp4', self.file_name)
+        os.rename(self.temp + 'av.mp4', self.file_name)
 
         # Clean Temp folder
         Clean(self.path)

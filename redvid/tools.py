@@ -1,6 +1,7 @@
-import re, os
+import re, os, shutil
 
 ope = os.path.exists
+opj = os.path.join
 sep = os.path.sep
 j = ''.join
 
@@ -103,10 +104,8 @@ def UserSelect(lst):
     return lst[int(ql) - 1]
 
 def Clean(path):
-    p = path + 'temp' + sep
-    if not ope(p):
-        return
-    os.chdir(path)
-    for i in os.listdir(p):
-        os.remove(p + i)
-    os.rmdir(p)
+    # v1.1.2: Cleaner method for removing temp folder
+    try:
+        shutil.rmtree(opj(path, 'temp'))
+    except:
+        pass
