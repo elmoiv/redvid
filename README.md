@@ -29,6 +29,15 @@ pip install git+https://github.com/elmoiv/redvid.git
 
 ## Usage
 Using *redvid* to download a video:
+  - via terminal (using [`credvid.py`](https://github.com/elmoiv/redvid/blob/master/credvid.py)):
+```
+python credvid.py -u "https://www.reddit.com/r/HolUp/comments/kqqoz8/hope_it_doesnt_happen/"
+```
+ credvid help :
+```
+usage: credvid.py [-h] -u URL [-p PATH] [-o] [-mxq] [-mnq] [-mxd MAXDURATION] [-mxs MAXSIZE] [-am] [-px PROXIES]
+```
+  - via scripts:
 
 ```python
 from redvid import Downloader
