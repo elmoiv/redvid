@@ -33,7 +33,7 @@ Using *redvid* to download a video:
 ```
 python credvid.py -u "https://www.reddit.com/r/HolUp/comments/kqqoz8/hope_it_doesnt_happen/"
 ```
- credvid help :
+*credvid help:*
 ```
 usage: credvid.py [-h] -u URL [-p PATH] [-o] [-mxq] [-mnq] [-mxd MAXDURATION] [-mxs MAXSIZE] [-am] [-px PROXIES]
 ```
@@ -46,7 +46,7 @@ reddit = Downloader(max_q=True)
 reddit.url = 'https://v.redd.it/c8oic7ppc2751'
 reddit.download()
 ```
-or
+*or*
 ```python
 __import__('redvid').Downloader(url='https://v.redd.it/c8oic7ppc2751', max_q=True).download()
 ```
