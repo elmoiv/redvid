@@ -112,5 +112,8 @@ Here are a few sample tests:
   * Added ffmpeg encoding to videos with no sound to be uploadable on some platforms.
   * Adjusted printed text and progress bars.
 
+## Stargazers over time
+[![Stargazers over time](https://starchart.cc/elmoiv/redvid.svg)](https://starchart.cc/elmoiv/redvid)
+
 ## Contributing
 Please contribute! If you want to fix a bug, suggest improvements, or add new features to the project, just [open an issue](https://github.com/elmoiv/redvid/issues) or send me a pull request.
