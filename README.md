@@ -54,7 +54,6 @@ optional arguments:
                         for old reddit videos with unknown qualities)
   -px PROXIES, --proxies PROXIES
                         Download videos through proxies for blocked regions
-usage: credvid.py [-h] -u URL [-p PATH] [-o] [-mxq] [-mnq] [-mxd MAXDURATION] [-mxs MAXSIZE] [-am] [-px PROXIES]
 ```
   - via scripts:
 
