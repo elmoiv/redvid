@@ -30,11 +30,30 @@ pip install git+https://github.com/elmoiv/redvid.git
 ## Usage
 Using *redvid* to download a video:
   - via terminal (using [`credvid.py`](https://github.com/elmoiv/redvid/blob/master/credvid.py)):
-```
-python credvid.py -u "https://www.reddit.com/r/HolUp/comments/kqqoz8/hope_it_doesnt_happen/"
-```
-*credvid help:*
-```
+```console
+> python credvid.py --help
+
+usage: credvid.py [-h] -u URL [-p PATH] [-o] [-mxq] [-mnq] [-mxd MAXDURATION]
+                  [-mxs MAXSIZE] [-am] [-px PROXIES]
+
+Argument parser for redvid module
+
+required arguments:
+  -u URL, --url URL     Post URL for Reddit hosted video
+
+optional arguments:
+  -p PATH, --path PATH  Custom path for downloaded videos
+  -o, --overwrite       Overwrite existing videos and ignore exception
+  -mxq, --maxquality    Auto select maximum quality
+  -mnq, --minquality    Auto select minimum quality
+  -mxd MAXDURATION, --maxduration MAXDURATION
+                        Ignore videos that exceed this duration (in seconds)
+  -mxs MAXSIZE, --maxsize MAXSIZE
+                        Ignore videos that exceed this size (in bytes)
+  -am, --automax        Automatically download video with maximum size (Helps
+                        for old reddit videos with unknown qualities)
+  -px PROXIES, --proxies PROXIES
+                        Download videos through proxies for blocked regions
 usage: credvid.py [-h] -u URL [-p PATH] [-o] [-mxq] [-mnq] [-mxd MAXDURATION] [-mxs MAXSIZE] [-am] [-px PROXIES]
 ```
   - via scripts:
