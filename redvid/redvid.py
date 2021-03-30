@@ -26,6 +26,7 @@ class Downloader(Requester):
                 max_d=1e1000,
                 max_s=1e1000,
                 auto_max=False,
+                auto_dir=True,
                 log=True,
                 proxies={}
                 ):
@@ -33,7 +34,7 @@ class Downloader(Requester):
         self.max, self.min, self.log = max_q, min_q, log
         self.max_d, self.max_s = max_d, max_s
         self.auto_max = auto_max
-        
+        self.auto_dir = auto_dir
         self.sizes_error = False
         self.page = None
         self.overwrite = False
@@ -55,7 +56,7 @@ class Downloader(Requester):
             if not self.max and not self.min:
                 self.max = True
 
-        self.path = checkPath(self.path)
+        self.path = checkPath(self.path, self.auto_dir)
         Clean(self.path)
         
         # v1.1.2: Fix recursive path by providing static

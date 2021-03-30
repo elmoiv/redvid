@@ -9,12 +9,17 @@ def lprint(switch=0, *args, **kwargs):
     if switch:
         print(*args, **kwargs)
 
-def checkPath(path):
+def checkPath(path, make_dirs=False):
+    #20 Make dirs on make_dirs flag
+    if make_dirs and path:
+        os.makedirs(path, exist_ok=True)
+    
     if not ope(path):
         path = os.getcwd()
     else:
         if os.path.isfile(path):
             path = os.path.dirname(path)
+    
     if path[-1] != sep:
         path += sep
     return path

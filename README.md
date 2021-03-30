@@ -95,7 +95,7 @@ Here are a few sample tests:
 
   * [Video only](https://github.com/elmoiv/redvid/tree/master/tests/test1.py)
   * [Video with audio](https://github.com/elmoiv/redvid/tree/master/tests/test2.py)
-  * [**[NEW]** Get best quality according to given size (Automated)](https://github.com/elmoiv/redvid/tree/master/tests/test12.py)
+  * [Get best quality according to given size (Automated)](https://github.com/elmoiv/redvid/tree/master/tests/test12.py)
   * [Choose PATH](https://github.com/elmoiv/redvid/tree/master/tests/test3.py)
   * [Auto-detect maximum quality](https://github.com/elmoiv/redvid/tree/master/tests/test4.py)
   * [Auto-detect minimum quality](https://github.com/elmoiv/redvid/tree/master/tests/test5.py)
@@ -107,6 +107,8 @@ Here are a few sample tests:
     * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
  
 ## Changelog
+### v1.1.3:
+  * [#20](https://github.com/elmoiv/redvid/issues/20) Added a feature to create a folder in case it does not exist.
 ### v1.1.2:
   * [#18](https://github.com/elmoiv/redvid/issues/18) Fixed bug when handling path that caused recursive directories.
 ### v1.1.1:

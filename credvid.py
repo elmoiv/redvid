@@ -18,6 +18,7 @@ optional.add_argument('-mnq',   '--minquality',     help='Auto select minimum qu
 optional.add_argument('-mxd',   '--maxduration',    help='Ignore videos that exceed this duration (in seconds)', type=int, default=1e1000)
 optional.add_argument('-mxs',   '--maxsize',        help='Ignore videos that exceed this size (in bytes)', type=int, default=1e1000)
 optional.add_argument('-am',    '--automax',        help='Automatically download video with maximum size (Helps for old reddit videos with unknown qualities)', action='store_true')
+optional.add_argument('-ad',    '--autodir',        help='Automatically create path if correctly typed and does not exist', action='store_true')
 optional.add_argument('-px',    '--proxies',        help='Download videos through proxies for blocked regions', type=dict, default={})
 
 args = parser.parse_args()
