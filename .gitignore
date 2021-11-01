@@ -5,8 +5,12 @@ __pycache__/
 
 # C extensions
 *.so
+*.css
+*.js
+*.html
 
 # Distribution / packaging
+content/
 .Python
 build/
 develop-eggs/
