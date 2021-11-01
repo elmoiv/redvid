@@ -1,9 +1,26 @@
-# redvid
-[![Build Status](https://api.travis-ci.org/elmoiv/redvid.svg?branch=master)](https://travis-ci.org/elmoiv/redvid)
-[![Python version](https://img.shields.io/badge/python-3.x-brightgreen.svg)](https://pypi.org/project/redvid/)
-[![Current Release](https://img.shields.io/github/v/release/elmoiv/redvid.svg)](https://github.com/elmoiv/redvid/releases)
+<h1 align="center">
+  <br>
+  <a href="https://github.com/elmoiv/redvid"><img src="https://github.com/elmoiv/redvid/blob/master/content/favicon.png?raw=true" alt="Redvid icon" width="100px"></a>
+  <br>
+  Redvid
+  <br>
+</h1>
+<h4 align="center">Smart Downloader for Reddit Hosted Videos</h4>
 
-### Smart downloader for Reddit *hosted* videos
+<p align=center>
+  <a target="_blank" href="https://travis-ci.org/elmoiv/redvid" title="Build Status">
+    <img src="https://api.travis-ci.org/elmoiv/redvid.svg?branch=master">
+  </a>
+  <a target="_blank" href="https://pypi.org/project/redvid/" title="Python Version">
+    <img src="https://img.shields.io/badge/python-3.x-brightgreen.svg">
+  </a>
+  <a target="_blank" href="https://github.com/elmoiv/redvid/releases" title="Current Version">
+    <img src="https://img.shields.io/github/v/release/elmoiv/redvid.svg">
+  </a>
+  <a target="_blank" href="LICENSE" title="License: MIT">
+    <img src="https://img.shields.io/github/license/elmoiv/redvid">
+  </a>
+</p>
 
 ## Features
 * Download local hosted videos with audio.
