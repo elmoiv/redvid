@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/elmoiv/redvid"><img src="https://github.com/elmoiv/redvid/blob/master/content/favicon.png?raw=true" alt="Redvid icon" width="100px"></a>
+  <a href="https://github.com/elmoiv/redvid"><img src="https://github.com/elmoiv/redvid/blob/master/assets/favicon.png?raw=true" alt="Redvid icon" width="100px"></a>
   <br>
   Redvid
   <br>
