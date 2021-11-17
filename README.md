@@ -22,6 +22,13 @@
   </a>
 </p>
 
+<h1 align="center">
+  <br>
+  Now available for Android
+  <br>
+</h1>
+<p align="center"><a href="https://play.google.com/store/apps/details?id=com.elmoiv.redvid"><img height="80px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1200px-Google_Play_Store_badge_EN.svg.png"></a></p>
+
 ## Features
 * Download local hosted videos with audio.
 * Requires only `requests` and `FFmpeg`.
