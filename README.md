@@ -24,7 +24,7 @@
 
 <h1 align="center">
   <br>
-  Now available for Android
+  Now available for Android*
   <br>
 </h1>
 <p align="center"><a href="https://play.google.com/store/apps/details?id=com.elmoiv.redvid"><img height="80px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1200px-Google_Play_Store_badge_EN.svg.png"></a></p>
@@ -160,3 +160,5 @@ Here are a few sample tests:
 
 ## Contributing
 Please contribute! If you want to fix a bug, suggest improvements, or add new features to the project, just [open an issue](https://github.com/elmoiv/redvid/issues) or send me a pull request.
+
+**Android version of Redvid is not open-source.*
