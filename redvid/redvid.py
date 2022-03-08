@@ -1,3 +1,4 @@
+from secrets import token_urlsafe
 from .requestmaker import Requester
 from .tools import *
 __import__('warnings').filterwarnings("ignore")
@@ -57,11 +58,10 @@ class Downloader(Requester):
                 self.max = True
 
         self.path = checkPath(self.path, self.auto_dir)
-        Clean(self.path)
         
         # v1.1.2: Fix recursive path by providing static
         # temp path
-        self.temp = opj(self.path, 'temp') + sep
+        self.temp = opj(self.path, 'temp', token_urlsafe()) + sep
         os.makedirs(self.temp, exist_ok=True)
         
         # Allow v.redd.it url formats
@@ -88,7 +88,7 @@ class Downloader(Requester):
         self.UNQ = getUNQ(self.page)
 
         if not self.UNQ:
-            Clean(self.path)
+            Clean(self.temp)
             raise BaseException('No video in this post')
         
         self.r_url = 'https://v.redd.it/' + self.UNQ + '/'
@@ -149,7 +149,7 @@ class Downloader(Requester):
         os.rename(self.temp + 'av.mp4', self.file_name)
 
         # Clean Temp folder
-        Clean(self.path)
+        Clean(self.temp)
     
     # v1.0.9: get size and duration
     def check(self):
@@ -243,7 +243,7 @@ class Downloader(Requester):
             os.remove(self.file_name)
         
         elif not self.overwrite and ope(self.file_name):
-            Clean(self.path)
+            Clean(self.temp)
             lprint(self.log, '{} exists!'.format(
                                     os.path.basename(self.file_name)
                                     )
@@ -253,7 +253,7 @@ class Downloader(Requester):
         lprint(self.log, '>> Downloading and Re-encoding...')
         self.get_and_mux()
         
-        Clean(self.path)
+        Clean(self.temp)
         lprint(self.log, '>> Done')
 
         return self.file_name
