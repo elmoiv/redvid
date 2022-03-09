@@ -107,6 +107,7 @@ def run():
         reddit.max_d = args.maxduration
         reddit.max_s = args.maxsize
         reddit.auto_max = args.automax
+        reddit.auto_dir = args.autodir
         reddit.proxies = args.proxies
 
         reddit.download()

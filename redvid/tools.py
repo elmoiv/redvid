@@ -26,7 +26,7 @@ def checkPath(path, make_dirs=False):
 
 def toJsonUrl(url):
     parts = url.split('/')
-    if len(parts) is 9:
+    if len(parts) == 9:
         url = '/'.join(parts[:-1])
     return url + '.json'
 
