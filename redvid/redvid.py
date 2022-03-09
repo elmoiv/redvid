@@ -61,7 +61,7 @@ class Downloader(Requester):
         
         # v1.1.2: Fix recursive path by providing static
         # temp path
-        self.temp = opj(self.path, 'temp', token_urlsafe()) + sep
+        self.temp = opj(self.path, 'redvid_temp', token_urlsafe()) + sep
         os.makedirs(self.temp, exist_ok=True)
         
         # Allow v.redd.it url formats
@@ -257,3 +257,6 @@ class Downloader(Requester):
         lprint(self.log, '>> Done')
 
         return self.file_name
+    
+    def clean_temp(self):
+        Clean(opj(self.path, 'redvid_temp'))

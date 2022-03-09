@@ -110,7 +110,4 @@ def UserSelect(lst):
 
 def Clean(path):
     # v1.1.2: Cleaner method for removing temp folder
-    try:
-        shutil.rmtree(path)
-    except:
-        pass
+    shutil.rmtree(path, ignore_errors=True)
