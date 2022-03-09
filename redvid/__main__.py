@@ -102,8 +102,8 @@ def run():
         reddit.url = args.url
         reddit.path = args.path
         reddit.overwrite = args.overwrite
-        reddit.max_q = args.maxquality
-        reddit.min_q = args.minquality
+        reddit.max = args.maxquality
+        reddit.min = args.minquality
         reddit.max_d = args.maxduration
         reddit.max_s = args.maxsize
         reddit.auto_max = args.automax
