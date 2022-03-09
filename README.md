@@ -52,31 +52,9 @@ pip install git+https://github.com/elmoiv/redvid.git
 
 ## Usage
 Using *redvid* to download a video:
-  - via terminal (using [`credvid.py`](https://github.com/elmoiv/redvid/blob/master/credvid.py)):
+  - via terminal (<a href="#console-commands">See console commands</a>):
 ```console
-> python credvid.py --help
-
-usage: credvid.py [-h] -u URL [-p PATH] [-o] [-mxq] [-mnq] [-mxd MAXDURATION]
-                  [-mxs MAXSIZE] [-am] [-px PROXIES]
-
-Argument parser for redvid module
-
-required arguments:
-  -u URL, --url URL     Post URL for Reddit hosted video
-
-optional arguments:
-  -p PATH, --path PATH  Custom path for downloaded videos
-  -o, --overwrite       Overwrite existing videos and ignore exception
-  -mxq, --maxquality    Auto select maximum quality
-  -mnq, --minquality    Auto select minimum quality
-  -mxd MAXDURATION, --maxduration MAXDURATION
-                        Ignore videos that exceed this duration (in seconds)
-  -mxs MAXSIZE, --maxsize MAXSIZE
-                        Ignore videos that exceed this size (in bytes)
-  -am, --automax        Automatically download video with maximum size (Helps
-                        for old reddit videos with unknown qualities)
-  -px PROXIES, --proxies PROXIES
-                        Download videos through proxies for blocked regions
+> redvid -u "https://v.redd.it/c8oic7ppc2751" -mxq
 ```
   - via scripts:
 
@@ -128,6 +106,37 @@ Here are a few sample tests:
     * [Set maximum video size (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test9.py)
   * [Set maximum video duration](https://github.com/elmoiv/redvid/tree/master/tests/test10.py)
     * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
+
+## Console Commands
+```console
+> redvid --help
+
+usage: redvid [-h] [-u URL] [-p PATH] [-o] [-mxq] [-mnq] [-mxd MAXDURATION]
+              [-mxs MAXSIZE] [-am] [-ad] [-px PROXIES] [-v] [-c]
+
+Argument parser for redvid module
+
+required arguments:
+  -u URL, --url URL     Post URL for Reddit hosted video
+
+optional arguments:
+  -p PATH, --path PATH  Custom path for downloaded videos
+  -o, --overwrite       Overwrite existing videos and ignore exception
+  -mxq, --maxquality    Auto select maximum quality
+  -mnq, --minquality    Auto select minimum quality
+  -mxd MAXDURATION, --maxduration MAXDURATION
+                        Ignore videos that exceed this duration (in seconds)
+  -mxs MAXSIZE, --maxsize MAXSIZE
+                        Ignore videos that exceed this size (in bytes)
+  -am, --automax        Automatically download video with maximum size (Helps
+                        for old reddit videos with unknown qualities)
+  -ad, --autodir        Automatically create path if correctly typed and does
+                        not exist
+  -px PROXIES, --proxies PROXIES
+                        Download videos through proxies for blocked regions
+  -v, --version         Show redvid version
+  -c, --clean           Clean temp folder after download is done
+```
 
 ## Stargazers over time
 [![Stargazers over time](https://starchart.cc/elmoiv/redvid.svg)](https://starchart.cc/elmoiv/redvid)
