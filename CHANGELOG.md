@@ -1,3 +1,7 @@
+### v1.2.0 - 09-03-2022:
+  * [#24](https://github.com/elmoiv/redvid/pull/24) Added support for parallel instances saving to same directory.
+  * You can now call `redvid` directly from terminal with no need for `credvid.py`.
+  * Added custom temp clean method.
 ### v1.1.3 - 30-03-2021:
   * [#20](https://github.com/elmoiv/redvid/issues/20) Added a feature to create a folder in case it does not exist.
 ### v1.1.2 - 05-01-2021:
