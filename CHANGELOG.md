@@ -1,3 +1,5 @@
+### v2.0.0 - 07-08-2023:
+  * [#32](https://github.com/elmoiv/redvid/issues/32) Fixed fetching audio with the new Reddit architecture.
 ### v1.2.0 - 09-03-2022:
   * [#24](https://github.com/elmoiv/redvid/pull/24) Added support for parallel instances saving to same directory.
   * You can now call `redvid` directly from terminal with no need for `credvid.py`.
