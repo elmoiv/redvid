@@ -79,20 +79,18 @@ def mpdParse(mpd):
         re_tags = vcfRemover(re_tags, tags)
 
     # Filter audio tag
-    tag_aud = None
-    for tag in re_tags:
-        if 'audio' in tag:
-            tag_aud = tag
-            re_tags.remove(tag)
+    audio_tags = [tag for tag in re_tags if 'audio' in tag[1].lower()]
+    video_tags = list(set(re_tags) - set(audio_tags))
+    tag_aud = audio_tags[-1] if audio_tags else None
     
     if not re_tags:
         return 0, 0
 
     # Allow getting qualities with old reddit method
     try:
-        yield sorted(re_tags, key=lambda a: int(a[1]))[::-1]
+        yield sorted(video_tags, key=lambda a: int(a[1]))[::-1]
     except:
-        yield sorted(re_tags, key=lambda a: a[1])[::-1]
+        yield sorted(video_tags, key=lambda a: a[1])[::-1]
 
     yield tag_aud
 
