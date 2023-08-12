@@ -1,5 +1,5 @@
 ### v2.0.1 - 11-08-2023:
-  * [#32](https://github.com/elmoiv/redvid/issues/32) Fixed mixing up .vtt files with videos.
+  * [#33](https://github.com/elmoiv/redvid/pull/33) Fixed mixing up .vtt files with videos.
 ### v2.0.0 - 07-08-2023:
   * [#32](https://github.com/elmoiv/redvid/issues/32) Fixed fetching audio with the new Reddit architecture.
 ### v1.2.0 - 09-03-2022:
