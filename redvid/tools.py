@@ -70,8 +70,8 @@ def vcfRemover(BaseUrls, rgx):
     return list(convertToReTags)
 
 def mpdParse(mpd):
-    # v1.0.8: Fix for new reddit mechanism
-    tags = r'<BaseURL>(DASH_)?(.*?)(\.mp4)?</BaseURL>'
+    # v2.0.1: Fix for new reddit mechanism
+    tags = r'<BaseURL>(DASH_)(?!vtt)(.*?)(\.mp4)?</BaseURL>'
     re_tags = re.findall(tags, mpd)
 
     # v1.1.1: Fix Base Urls from vcf.redd.it
