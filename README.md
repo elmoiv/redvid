@@ -103,10 +103,10 @@ Here are a few sample tests:
   * [Skip file check and overwrite](https://github.com/elmoiv/redvid/tree/master/tests/test6.py)
   * [Silent download (No logging)](https://github.com/elmoiv/redvid/tree/master/tests/test7.py)
   * [Set maximum video size](https://github.com/elmoiv/redvid/tree/master/tests/test8.py)
-    * [Set maximum video size (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test9.py)
+  * [Set maximum video size (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test9.py)
   * [Set maximum video duration](https://github.com/elmoiv/redvid/tree/master/tests/test10.py)
-    * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
-
+  * [Set maximum video duration (different technique)](https://github.com/elmoiv/redvid/tree/master/tests/test11.py)
+  * [Custom Filename](tests/test13.py)
 ## Console Commands
 ```console
 > redvid --help
@@ -124,6 +124,8 @@ optional arguments:
   -o, --overwrite       Overwrite existing videos and ignore exception
   -mxq, --maxquality    Auto select maximum quality
   -mnq, --minquality    Auto select minimum quality
+  -fn FILENAME, --filename FILENAME
+                        Set custom filename for downloaded video
   -mxd MAXDURATION, --maxduration MAXDURATION
                         Ignore videos that exceed this duration (in seconds)
   -mxs MAXSIZE, --maxsize MAXSIZE
