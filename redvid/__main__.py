@@ -44,6 +44,12 @@ def run():
         help='Auto select minimum quality'
     )
     optional.add_argument(
+        '-fn',
+        '--filename',
+        type=str,
+        help='Set custom filename for downloaded video'
+    )
+    optional.add_argument(
         '-mxd',
         '--maxduration',
         type=int,
@@ -109,6 +115,7 @@ def run():
         reddit.auto_max = args.automax
         reddit.auto_dir = args.autodir
         reddit.proxies = args.proxies
+        reddit.filename = args.filename
 
         reddit.download()
         if args.clean:

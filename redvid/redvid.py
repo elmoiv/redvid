@@ -10,6 +10,7 @@ class Downloader(Requester):
     Attributes:
         url (str): Reddit post url that contains video.
         path (str): Location where videos will be saved.
+        filename (str): Name of the downloaded file.
         max_q (bool): Get video with maximum quality.
         min_q (bool): Get video with minimum quality.
         max_d (int): Allow only when duration is <= max_d.
@@ -22,6 +23,7 @@ class Downloader(Requester):
                 self,
                 url='',
                 path='',
+                filename='',
                 max_q=False,
                 min_q=False,
                 max_d=1e1000,
@@ -37,6 +39,7 @@ class Downloader(Requester):
         self.auto_max = auto_max
         self.auto_dir = auto_dir
         self.sizes_error = False
+        self.filename = filename  # Store the desired filename
         self.page = None
         self.overwrite = False
         self.ischeck = False
@@ -76,7 +79,7 @@ class Downloader(Requester):
                             _proxies=self.proxies
                             )
         
-        if self.page.status_code is 200:
+        if self.page.status_code == 200:
             return True
         
         raise BaseException('Incorrect URL format')
@@ -199,10 +202,12 @@ class Downloader(Requester):
         
         self.video = self.r_url + quality
 
-        self.file_name = '{}{}-{}.mp4'.format(
+        self.file_name = '{}{}.mp4'.format(
                                     self.path,
-                                    self.UNQ,
-                                    quality
+                                    self.filename if self.filename else '-'.join(
+                                        [self.UNQ,
+                                        quality]
+                                    )
                                     # v1.0.8: fix file name dups
                                     ).replace('.mp4' * 2, '.mp4')
         
