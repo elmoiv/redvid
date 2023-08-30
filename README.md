@@ -8,9 +8,9 @@
 <h4 align="center">Smart Downloader for Reddit Hosted Videos</h4>
 
 <p align=center>
-  <a target="_blank" href="https://travis-ci.org/elmoiv/redvid" title="Build Status">
+<!--   <a target="_blank" href="https://travis-ci.org/elmoiv/redvid" title="Build Status">
     <img src="https://api.travis-ci.org/elmoiv/redvid.svg?branch=master">
-  </a>
+  </a> -->
   <a target="_blank" href="https://pypi.org/project/redvid/" title="Python Version">
     <img src="https://img.shields.io/badge/python-3.x-brightgreen.svg">
   </a>
