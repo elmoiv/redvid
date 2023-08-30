@@ -1,3 +1,5 @@
+### v2.0.2 - 30-08-2023:
+  * [#34](https://github.com/elmoiv/redvid/pull/34) Added option to set custom filename.
 ### v2.0.1 - 11-08-2023:
   * [#33](https://github.com/elmoiv/redvid/pull/33) Fixed mixing up .vtt files with videos.
 ### v2.0.0 - 07-08-2023:
