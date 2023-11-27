@@ -26,6 +26,12 @@ def run():
         help='Custom path for downloaded videos'
     )
     optional.add_argument(
+        '-fn',
+        '--filename',
+        type=str,
+        help='Set custom filename for downloaded video'
+    )
+    optional.add_argument(
         '-o',
         '--overwrite',
         action='store_true',
@@ -42,12 +48,6 @@ def run():
         '--minquality',
         action='store_true',
         help='Auto select minimum quality'
-    )
-    optional.add_argument(
-        '-fn',
-        '--filename',
-        type=str,
-        help='Set custom filename for downloaded video'
     )
     optional.add_argument(
         '-mxd',
@@ -89,10 +89,10 @@ def run():
         help='Show redvid version'
     )
     optional.add_argument(
-        '-c',
-        '--clean',
+        '-nc',
+        '--noclean',
         action='store_true',
-        help='Clean temp folder after download is done'
+        help='Don\'t clean temp folder after download is done'
     )
 
     args = parser.parse_args()
@@ -118,7 +118,7 @@ def run():
         reddit.filename = args.filename
 
         reddit.download()
-        if args.clean:
+        if not args.noclean:
             reddit.clean_temp()
 
 if __name__ == '__main__':

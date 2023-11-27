@@ -1,6 +1,8 @@
 from secrets import token_urlsafe
 from .requestmaker import Requester
 from .tools import *
+from uuid import uuid4
+
 __import__('warnings').filterwarnings("ignore")
 
 class Downloader(Requester):
@@ -10,7 +12,6 @@ class Downloader(Requester):
     Attributes:
         url (str): Reddit post url that contains video.
         path (str): Location where videos will be saved.
-        filename (str): Name of the downloaded file.
         max_q (bool): Get video with maximum quality.
         min_q (bool): Get video with minimum quality.
         max_d (int): Allow only when duration is <= max_d.
@@ -48,6 +49,7 @@ class Downloader(Requester):
         self.videos = []
         self.video, self.audio, self.file_name = '', '', ''
         self.duration, self.size = 0, 0
+        self.__unique_id = str(uuid4())
         
     def setup(self):
         """
@@ -117,13 +119,13 @@ class Downloader(Requester):
         """
         Downloads video to the current working directory
         """
-        self.pgbar(self.log, self.video, self.temp + 'video.mp4', '>> Video:')
+        self.pgbar(self.log, self.video, self.temp + self.__unique_id + 'video.mp4', '>> Video:')
 
     def get_audio(self):
         """
         Downloads audio to the current working directory
         """
-        self.pgbar(self.log, self.audio, self.temp + 'audio.m4a', '>> Audio:')
+        self.pgbar(self.log, self.audio, self.temp + self.__unique_id + 'audio.m4a', '>> Audio:')
 
     def get_and_mux(self):
         """
@@ -137,19 +139,19 @@ class Downloader(Requester):
             os.system(
                     'ffmpeg -hide_banner -loglevel panic -y -i "{0}video.mp4"'
                     ' -i "{0}audio.m4a" -vcodec copy -acodec copy "{0}av.mp4"'.format(
-                        self.temp
+                        self.temp + self.__unique_id
                     )
                 )
         else:
             os.system(
                     'ffmpeg -hide_banner -loglevel panic -y -i "{0}video.mp4"'
                     ' -vcodec copy "{0}av.mp4"'.format(
-                        self.temp
+                        self.temp + self.__unique_id
                     )
                 )
 
         # Moving video file without using shutil
-        os.rename(self.temp + 'av.mp4', self.file_name)
+        os.rename(self.temp + self.__unique_id + 'av.mp4', self.file_name)
 
         # Clean Temp folder
         Clean(self.temp)
@@ -231,6 +233,8 @@ class Downloader(Requester):
             1: Duration exceeds maximum
             2: File exists
         """
+        self.__unique_id = str(uuid4())
+
         if not self.ischeck:
             self.check()
         self.ischeck = False
