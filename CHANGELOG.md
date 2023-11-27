@@ -1,3 +1,6 @@
+### v2.0.3 - 27-11-2023:
+  * [#35](https://github.com/elmoiv/redvid/pull/35) Fixed random audio track given to videos with no audio track.
+  * Temp cleaning is now true by default. Use `-nc` or `--noclean` to save temp files.
 ### v2.0.2 - 30-08-2023:
   * [#34](https://github.com/elmoiv/redvid/pull/34) Added option to set custom filename.
 ### v2.0.1 - 11-08-2023:
