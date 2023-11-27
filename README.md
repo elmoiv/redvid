@@ -137,7 +137,7 @@ optional arguments:
   -px PROXIES, --proxies PROXIES
                         Download videos through proxies for blocked regions
   -v, --version         Show redvid version
-  -c, --clean           Clean temp folder after download is done
+  -nc, --noclean        Don't clean temp folder after download is done
 ```
 
 ## Stargazers over time
