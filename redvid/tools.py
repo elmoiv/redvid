@@ -72,14 +72,15 @@ def vcfRemover(BaseUrls, rgx):
 def mpdParse(mpd):
     # v2.0.1: Fix for new reddit mechanism
     tags = r'<BaseURL>(DASH_)(?!vtt)(.*?)(\.mp4)?</BaseURL>'
-    re_tags = re.findall(tags, mpd)
+    tags_a = r'<BaseURL>(audio)(\.mp4)?</BaseURL>'
+    re_tags = re.findall(tags, mpd) + re.findall(tags_a, mpd)
 
     # v1.1.1: Fix Base Urls from vcf.redd.it
     if any('vcf.redd.it' in j(i) for i in re_tags):
         re_tags = vcfRemover(re_tags, tags)
 
     # Filter audio tag
-    audio_tags = [tag for tag in re_tags if 'audio' in tag[1].lower()]
+    audio_tags = [tag for tag in re_tags if 'audio' in j(tag).lower()]
     video_tags = list(set(re_tags) - set(audio_tags))
     tag_aud = audio_tags[-1] if audio_tags else None
     
