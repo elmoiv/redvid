@@ -151,7 +151,7 @@ class Downloader(Requester):
                 )
 
         # Moving video file without using shutil
-        os.rename(self.temp + self.__unique_id + 'av.mp4', self.file_name)
+        os.rename(self.temp + self.__unique_id + 'video.mp4', self.file_name)
 
         # Clean Temp folder
         Clean(self.temp)
