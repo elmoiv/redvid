@@ -75,7 +75,7 @@ def mpdParse(mpd):
     tags_a = r'<BaseURL>(audio)(\.mp4)?</BaseURL>'
     re_tags = re.findall(tags, mpd) + re.findall(tags_a, mpd)
 
-    # v2.0.4: Fix to get highest available video resolution
+    # v2.0.5: Fix to get highest available video resolution
     tag_max_q = r'maxHeight=\"([0-9]+)\"'
     max_q = re.findall(tag_max_q, mpd)[0]
     if max_q:

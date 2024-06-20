@@ -1,3 +1,5 @@
+### v2.0.5 - 20-06-2024:
+  * [#43](https://github.com/elmoiv/redvid/pull/43) Fixed scraping the highest available video resolution in mpd parse
 ### v2.0.3 - 27-11-2023:
   * [#35](https://github.com/elmoiv/redvid/pull/35) Fixed random audio track given to videos with no audio track.
   * Temp cleaning is now true by default. Use `-nc` or `--noclean` to save temp files.
