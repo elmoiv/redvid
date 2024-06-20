@@ -55,6 +55,11 @@ def getSizes(u, h, p, vs):
         )
     return sizes
 
+def getMaxMinQualities(page, vredd_url):
+    regex = rf'{vredd_url}(DASH_)(\d+)(\.mp4)'
+    Match = re.findall(regex, page.text)
+    return Match
+
 # v1.1.1: if 'vcf.redd.it' in <BASEURL>
 # we extract DASH quality names and store them in
 # the same form of original re.findall result
@@ -69,7 +74,7 @@ def vcfRemover(BaseUrls, rgx):
     )
     return list(convertToReTags)
 
-def mpdParse(mpd):
+def mpdParse(mpd, custom_video_qualities=[]):
     # v2.0.1: Fix for new reddit mechanism
     tags = r'<BaseURL>(DASH_)(?!vtt)(.*?)(\.mp4)?</BaseURL>'
     tags_a = r'<BaseURL>(audio)(\.mp4)?</BaseURL>'
@@ -83,7 +88,12 @@ def mpdParse(mpd):
     audio_tags = [tag for tag in re_tags if 'audio' in j(tag).lower()]
     video_tags = list(set(re_tags) - set(audio_tags))
     tag_aud = audio_tags[-1] if audio_tags else None
-    
+
+    # v2.0.5: Adding max and min qualities
+    for quality in custom_video_qualities:
+        if quality not in video_tags:
+            video_tags.append(quality)
+
     if not re_tags:
         return 0, 0
 

@@ -103,8 +103,11 @@ class Downloader(Requester):
                         self.r_url + 'DASHPlaylist.mpd',
                         _proxies=self.proxies
                         )
+        
+        max_min_qualities = getMaxMinQualities(self.page, self.r_url)
+
         # v1.0.8: Fix new Reddit mechanism
-        VQS, AQS = mpdParse(mpd.text)
+        VQS, AQS = mpdParse(mpd.text, custom_video_qualities=max_min_qualities)
 
         if [VQS, AQS] == [0, 0]:
             raise BaseException('Qualities not found!')

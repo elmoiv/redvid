@@ -1,3 +1,7 @@
+### v2.0.5 - 20-06-2024:
+  * [#42](https://github.com/elmoiv/redvid/pull/35) Fixed maximum and minimum video qualities not fetched.
+### v2.0.4 - 04-03-2024:
+  * [#39](https://github.com/elmoiv/redvid/issues/39) Fixed audio not downloaded due to new Reddit patches.
 ### v2.0.3 - 27-11-2023:
   * [#35](https://github.com/elmoiv/redvid/pull/35) Fixed random audio track given to videos with no audio track.
   * Temp cleaning is now true by default. Use `-nc` or `--noclean` to save temp files.
