@@ -14,6 +14,9 @@
   <a target="_blank" href="https://pypi.org/project/redvid/" title="Python Version">
     <img src="https://img.shields.io/badge/python-3.x-brightgreen.svg">
   </a>
+    <a target="_blank" href="https://pypi.org/project/redvid/" title="PyPi Total Downloads">
+    <img src="https://static.pepy.tech/badge/redvid">
+  </a>
   <a target="_blank" href="https://github.com/elmoiv/redvid/releases" title="Current Version">
     <img src="https://img.shields.io/github/v/release/elmoiv/redvid.svg">
   </a>
