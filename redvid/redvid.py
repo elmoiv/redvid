@@ -2,6 +2,7 @@ from secrets import token_urlsafe
 from .requestmaker import Requester
 from .tools import *
 from uuid import uuid4
+from moviepy.editor import VideoFileClip, AudioFileClip
 
 __import__('warnings').filterwarnings("ignore")
 
