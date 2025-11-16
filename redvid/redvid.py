@@ -2,6 +2,7 @@ from secrets import token_urlsafe
 from .requestmaker import Requester
 from .tools import *
 from uuid import uuid4
+from moviepy.editor import VideoFileClip, AudioFileClip
 
 __import__('warnings').filterwarnings("ignore")
 
@@ -84,7 +85,7 @@ class Downloader(Requester):
         if self.page.status_code == 200:
             return True
         
-        raise BaseException('Incorrect URL format')
+        raise Exception('Incorrect URL format')
 
     def scrape(self):
         """
@@ -94,7 +95,7 @@ class Downloader(Requester):
 
         if not self.UNQ:
             Clean(self.temp)
-            raise BaseException('No video in this post')
+            raise Exception('No video in this post')
         
         self.r_url = 'https://v.redd.it/' + self.UNQ + '/'
 
@@ -122,39 +123,49 @@ class Downloader(Requester):
         """
         Downloads video to the current working directory
         """
-        self.pgbar(self.log, self.video, self.temp + self.__unique_id + 'video.mp4', '>> Video:')
+        self.pgbar(self.log, self.video, self.temp + 'video.mp4', '>> Video:')
 
     def get_audio(self):
         """
         Downloads audio to the current working directory
         """
-        self.pgbar(self.log, self.audio, self.temp + self.__unique_id + 'audio.m4a', '>> Audio:')
+        self.pgbar(self.log, self.audio, self.temp + 'audio.m4a', '>> Audio:')
 
     def get_and_mux(self):
         """
-        Video or muxed video with audio if exists
+        Video or muxed video with audio if exists (using moviepy)
         """
         self.get_video()
-
-        # v1.0.5: Convert muted videos to be shareable
+    
+        video_path = os.path.join(self.temp, 'video.mp4')
+        output_path = self.file_name
+    
         if self.audio:
             self.get_audio()
-            os.system(
-                    'ffmpeg -hide_banner -loglevel panic -y -i "{0}video.mp4"'
-                    ' -i "{0}audio.m4a" -vcodec copy -acodec copy "{0}av.mp4"'.format(
-                        self.temp + self.__unique_id
-                    )
-                )
+            audio_path = os.path.join(self.temp, 'audio.m4a')
+    
+            try:
+                video_clip = VideoFileClip(video_path)
+                audio_clip = AudioFileClip(audio_path)
+    
+                final_clip = video_clip.set_audio(audio_clip)
+    
+                final_clip.write_videofile(output_path, codec="libx264", audio_codec="aac")
+    
+                video_clip.close()
+                audio_clip.close()
+            except Exception as e:
+                raise BaseException(f"Error during video and audio merging: {e}")
         else:
-            os.system(
-                    'ffmpeg -hide_banner -loglevel panic -y -i "{0}video.mp4"'
-                    ' -vcodec copy "{0}av.mp4"'.format(
-                        self.temp + self.__unique_id
-                    )
-                )
-
-        # Moving video file without using shutil
-        os.rename(self.temp + self.__unique_id + 'av.mp4', self.file_name)
+            try:
+                video_clip = VideoFileClip(video_path)
+                video_clip.write_videofile(output_path, codec="libx264")
+                video_clip.close()
+            except Exception as e:
+                raise BaseException(f"Error during video processing: {e}")
+    
+        # Clean Temp folder
+        Clean(self.temp)
 
         # Clean Temp folder
         Clean(self.temp)
