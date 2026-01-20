@@ -84,7 +84,7 @@ class Downloader(Requester):
         if self.page.status_code == 200:
             return True
         
-        raise BaseException('Incorrect URL format')
+        raise Exception('Incorrect URL format')
 
     def scrape(self):
         """
@@ -94,7 +94,7 @@ class Downloader(Requester):
 
         if not self.UNQ:
             Clean(self.temp)
-            raise BaseException('No video in this post')
+            raise Exception('No video in this post')
         
         self.r_url = 'https://v.redd.it/' + self.UNQ + '/'
 
@@ -110,7 +110,7 @@ class Downloader(Requester):
         VQS, AQS = mpdParse(mpd.text, custom_video_qualities=max_min_qualities)
 
         if [VQS, AQS] == [0, 0]:
-            raise BaseException('Qualities not found!')
+            raise Exception('Qualities not found!')
 
         self.videos = VQS
 
